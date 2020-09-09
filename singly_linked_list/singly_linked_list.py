@@ -45,16 +45,31 @@ class LinkedList:
 
     #create a remove tail function
     def remove_tail(self):
+        #check is th head and tail have no value
         if self.head is None and self.tail is None:
             return None
         
+        #get the value of the tail that we will remove
+        value = self.tail.get_value()
+        
+        #check if there is only one item (head and tail are the same)
+        #id there is only one item we will set head and tail to None
+        #None will delete both tail and head
+        if self.head == self.tail:
+            self.head = None
+            self.tail = None
+            return value
+
+        #loop through the list until we reach the tail
         current = self.head
         while current.next_node is not self.tail:
             current = current.next_node
         
-        value = self.tail.get_value()
+        #set set the next node to None (this is the tail that we are setting to None)
         current.next_node = None
+        #set the tail to None
         self.tail = None
+        #move the tail to the current item
         self.tail = current
         
         #self.tail.next_node = None
